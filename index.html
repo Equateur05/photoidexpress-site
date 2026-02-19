@@ -3,79 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Identite Express - Support</title>
+    <title>Photo ID Express - Photo d'identite officielle en 30 sec</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a1a; color: #e0e0f0; line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #1a1a3e 0%, #2d1b69 100%); padding: 60px 20px; text-align: center; }
-        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        .header p { font-size: 1.2em; color: #a0a0d0; }
-        .icon { width: 80px; height: 80px; background: linear-gradient(135deg, #4a6cf7, #7b5ea7); border-radius: 18px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
-        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        .card { background: #12122a; border-radius: 16px; padding: 30px; margin-bottom: 30px; border: 1px solid #1e1e40; }
-        .card h2 { color: #7b8cff; margin-bottom: 15px; font-size: 1.5em; }
-        .card p { color: #b0b0d0; margin-bottom: 12px; }
-        .card a { color: #7b8cff; }
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0; }
-        .feature { background: #12122a; border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #1e1e40; }
-        .feature .emoji { font-size: 2em; margin-bottom: 10px; }
-        .feature h3 { color: #e0e0f0; margin-bottom: 8px; }
-        .feature p { color: #8080b0; font-size: 0.9em; }
-        .nav { display: flex; gap: 20px; justify-content: center; margin-top: 20px; }
-        .nav a { color: #7b8cff; text-decoration: none; padding: 10px 20px; border: 1px solid #7b8cff; border-radius: 8px; transition: all 0.3s; }
-        .nav a:hover { background: #7b8cff; color: white; }
-        .footer { text-align: center; padding: 40px 20px; color: #606090; border-top: 1px solid #1e1e40; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5fa; color: #1a1a2e; line-height: 1.6; }
+        .hero { background: linear-gradient(135deg, #f8f9ff 0%, #eef0ff 100%); padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(74,108,247,0.05) 0%, transparent 60%); }
+        .logo-container { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .logo-icon { width: 64px; height: 64px; background: linear-gradient(135deg, #4a6cf7, #3b5de7); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: white; position: relative; box-shadow: 0 8px 24px rgba(74,108,247,0.3); }
+        .logo-icon .badge { position: absolute; top: -4px; right: -4px; width: 20px; height: 20px; background: #e74c3c; border-radius: 50%; border: 2px solid white; }
+        .logo-text { text-align: left; }
+        .logo-text h1 { font-size: 1.8em; font-weight: 800; color: #1a1a2e; letter-spacing: 1px; }
+        .logo-text h1 span { color: #e74c3c; font-weight: 600; }
+        .hero-title { font-size: 2em; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+        .hero-sub { font-size: 1.05em; color: #666; max-width: 500px; margin: 0 auto 30px; }
+        .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+        .badge-item { background: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85em; color: #4a6cf7; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: flex; align-items: center; gap: 6px; }
+        .app-btn { display: inline-flex; align-items: center; gap: 10px; background: #000; color: white; padding: 14px 28px; border-radius: 12px; text-decoration: none; font-size: 1em; font-weight: 600; transition: transform 0.2s; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+        .app-btn:hover { transform: translateY(-2px); }
+        .app-btn svg { width: 24px; height: 24px; fill: white; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .section-title { font-size: 1.1em; font-weight: 700; color: #4a6cf7; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .section-title::before { content: ''; width: 3px; height: 20px; background: #4a6cf7; border-radius: 2px; }
+        .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 50px; }
+        .doc-card { background: white; border-radius: 16px; padding: 24px; display: flex; align-items: center; gap: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #eee; transition: transform 0.2s, box-shadow 0.2s; cursor: default; }
+        .doc-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .doc-card .icon { width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+        .doc-card .icon.blue { background: #eef2ff; }
+        .doc-card .icon.red { background: #fff0f0; }
+        .doc-card .icon.green { background: #f0fff4; }
+        .doc-card .icon.purple { background: #f5f0ff; }
+        .doc-card h3 { font-size: 0.95em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .doc-card p { font-size: 0.85em; color: #888; margin-top: 2px; }
+        .doc-card .size { display: inline-block; background: #eef2ff; color: #4a6cf7; padding: 2px 10px; border-radius: 6px; font-size: 0.75em; font-weight: 600; margin-top: 4px; }
+        .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 50px; }
+        .step { text-align: center; padding: 30px 20px; }
+        .step-num { width: 48px; height: 48px; background: linear-gradient(135deg, #4a6cf7, #3b5de7); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2em; font-weight: 700; margin: 0 auto 16px; box-shadow: 0 4px 12px rgba(74,108,247,0.3); }
+        .step h3 { font-size: 1em; font-weight: 700; margin-bottom: 8px; }
+        .step p { font-size: 0.9em; color: #666; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 50px; }
+        .feature-card { background: white; border-radius: 14px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #eee; }
+        .feature-card .emoji { font-size: 2em; margin-bottom: 12px; }
+        .feature-card h3 { font-size: 1em; font-weight: 700; margin-bottom: 6px; }
+        .feature-card p { font-size: 0.9em; color: #666; }
+        .cta-section { background: linear-gradient(135deg, #4a6cf7, #3b5de7); border-radius: 20px; padding: 50px 30px; text-align: center; color: white; margin-bottom: 50px; }
+        .cta-section h2 { font-size: 1.8em; margin-bottom: 12px; }
+        .cta-section p { font-size: 1.05em; opacity: 0.9; margin-bottom: 24px; }
+        .cta-section .price { font-size: 2.5em; font-weight: 800; margin-bottom: 8px; }
+        .cta-section .price-sub { font-size: 0.95em; opacity: 0.8; margin-bottom: 24px; }
+        .cta-btn { display: inline-block; background: white; color: #4a6cf7; padding: 14px 36px; border-radius: 12px; font-weight: 700; text-decoration: none; font-size: 1.05em; transition: transform 0.2s; }
+        .cta-btn:hover { transform: translateY(-2px); }
+        .nav { display: flex; gap: 24px; justify-content: center; padding: 20px; background: white; border-bottom: 1px solid #eee; }
+        .nav a { color: #4a6cf7; text-decoration: none; font-weight: 600; font-size: 0.9em; }
+        .footer { text-align: center; padding: 40px 20px; color: #999; background: white; border-top: 1px solid #eee; }
+        .footer a { color: #4a6cf7; text-decoration: none; }
+        @media (max-width: 600px) { .hero-title { font-size: 1.5em; } .logo-text h1 { font-size: 1.4em; } }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="icon">&#128247;</div>
-        <h1>Photo Identite Express</h1>
-        <p>Creez vos photos d'identite conformes en quelques secondes</p>
-        <div class="nav">
-            <a href="/">Accueil</a>
-            <a href="/privacy">Confidentialite</a>
-            <a href="/support">Support</a>
+    <nav class="nav">
+        <a href="/">Accueil</a>
+        <a href="/privacy">Confidentialite</a>
+        <a href="/support">Support</a>
+    </nav>
+
+    <div class="hero">
+        <div class="logo-container">
+            <div class="logo-icon">
+                &#128247;
+                <div class="badge"></div>
+            </div>
+            <div class="logo-text">
+                <h1>PHOTO ID<br><span>EXPRESS</span></h1>
+            </div>
         </div>
+        <h2 class="hero-title">Photo d'identite officielle en 30 sec</h2>
+        <p class="hero-sub">Verification IA automatique. Conforme ANTS. 100% automatise. Sans employe. Instantane.</p>
+        <div class="badges">
+            <span class="badge-item">&#9989; Conforme ANTS</span>
+            <span class="badge-item">&#129302; IA integree</span>
+            <span class="badge-item">&#128274; 100% local</span>
+            <span class="badge-item">&#9889; 30 secondes</span>
+        </div>
+        <a href="https://apps.apple.com/app/photo-identite-express/id6758770084" class="app-btn">
+            <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Telecharger sur l'App Store
+        </a>
     </div>
+
     <div class="container">
-        <div class="features">
-            <div class="feature">
-                <div class="emoji">&#128247;</div>
-                <h3>Photo IA</h3>
-                <p>Verification automatique de conformite par intelligence artificielle</p>
+        <div class="section-title">Choisir un document</div>
+        <div class="doc-grid">
+            <div class="doc-card">
+                <div class="icon blue">&#128452;</div>
+                <div>
+                    <h3>Passeport</h3>
+                    <p>Biometrique francais</p>
+                    <span class="size">35x45 mm</span>
+                </div>
             </div>
-            <div class="feature">
+            <div class="doc-card">
+                <div class="icon red">&#127383;</div>
+                <div>
+                    <h3>Carte d'identite</h3>
+                    <p>CNI francaise</p>
+                    <span class="size">35x45 mm</span>
+                </div>
+            </div>
+            <div class="doc-card">
+                <div class="icon green">&#127758;</div>
+                <div>
+                    <h3>Visa / International</h3>
+                    <p>USA, UK, Schengen, 100+ pays</p>
+                    <span class="size">Multi-formats</span>
+                </div>
+            </div>
+            <div class="doc-card">
+                <div class="icon purple">&#128663;</div>
+                <div>
+                    <h3>Permis de conduire</h3>
+                    <p>Format francais</p>
+                    <span class="size">35x45 mm</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title">Comment ca marche</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h3>Prenez votre photo</h3>
+                <p>Utilisez l'appareil photo de votre telephone ou importez une photo existante</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h3>Verification IA</h3>
+                <p>Notre IA verifie la conformite : cadrage, fond, expression, dimensions</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h3>Telechargez</h3>
+                <p>Recevez votre photo conforme prete a imprimer en quelques secondes</p>
+            </div>
+        </div>
+
+        <div class="section-title">Fonctionnalites</div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="emoji">&#129302;</div>
+                <h3>Verification IA automatique</h3>
+                <p>Intelligence artificielle qui verifie la conformite de votre photo en temps reel</p>
+            </div>
+            <div class="feature-card">
                 <div class="emoji">&#127467;&#127479;</div>
-                <h3>Multi-formats</h3>
-                <p>France, USA, UK, Schengen et plus de 100 pays</p>
+                <h3>Conforme ANTS</h3>
+                <p>Photos acceptees pour les demandes officielles francaises (passeport, CNI, permis)</p>
             </div>
-            <div class="feature">
-                <div class="emoji">&#9889;</div>
-                <h3>Express</h3>
-                <p>Photo prete en moins de 30 secondes</p>
-            </div>
-            <div class="feature">
+            <div class="feature-card">
                 <div class="emoji">&#128274;</div>
-                <h3>Vie privee</h3>
-                <p>Aucune donnee collectee, tout reste sur votre appareil</p>
+                <h3>100% vie privee</h3>
+                <p>Aucune donnee envoyee. Tout le traitement se fait localement sur votre appareil</p>
+            </div>
+            <div class="feature-card">
+                <div class="emoji">&#127760;</div>
+                <h3>100+ pays supportes</h3>
+                <p>Formats pour passeports, visas et cartes d'identite du monde entier</p>
             </div>
         </div>
-        <div class="card">
-            <h2>&#128231; Contact &amp; Support</h2>
-            <p>Pour toute question ou demande d'assistance :</p>
-            <p>Email : <a href="mailto:charlesrocher75@gmail.com">charlesrocher75@gmail.com</a></p>
-            <p>Nous repondons sous 24 heures.</p>
-        </div>
-        <div class="card">
-            <h2>&#11088; Premium</h2>
-            <p>Debloquez l'acces illimite a vie pour seulement 2,99 euros. Aucun abonnement, un seul paiement.</p>
-            <p>Inclut : photos illimitees, verification IA, export haute resolution, tous les formats internationaux.</p>
+
+        <div class="cta-section">
+            <h2>Debloquez l'acces illimite</h2>
+            <p>Toutes les fonctionnalites premium, a vie</p>
+            <div class="price">2,99 &#8364;</div>
+            <div class="price-sub">Paiement unique - Aucun abonnement</div>
+            <a href="https://apps.apple.com/app/photo-identite-express/id6758770084" class="cta-btn">Telecharger l'app</a>
         </div>
     </div>
+
     <div class="footer">
         <p>&copy; 2026 Charles Rocher. Tous droits reserves.</p>
-        <p style="margin-top:10px;"><a href="/privacy" style="color:#606090;">Politique de confidentialite</a></p>
+        <p style="margin-top:10px;">
+            <a href="/privacy">Politique de confidentialite</a> &middot;
+            <a href="/support">Support</a> &middot;
+            <a href="mailto:charlesrocher75@gmail.com">Contact</a>
+        </p>
     </div>
 </body>
 </html>
